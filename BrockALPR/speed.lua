@@ -19,18 +19,18 @@ local radar =
 --local distanceToCheckFront = 50
 
 function DrawAdvancedText(x,y ,w,h,sc, text, r,g,b,a,font,jus)
-    SetTextFont(font)
-    SetTextProportional(0)
-    SetTextScale(sc, sc)
-	N_0x4e096588b13ffeca(jus)
-    SetTextColour(r, g, b, a)
-    SetTextDropShadow(0, 0, 0, 0,255)
-    SetTextEdge(1, 0, 0, 0, 255)
-    SetTextDropShadow()
-    SetTextOutline()
-    SetTextEntry("STRING")
-    AddTextComponentString(text)
-	DrawText(x - 0.1+w, y - 0.02+h)
+  SetTextFont(font)
+  SetTextProportional(0)
+  SetTextScale(sc, sc)
+  SetTextJustification(jus)
+  SetTextColour(r, g, b, a)
+  SetTextDropShadow(0, 0, 0, 0,255)
+  SetTextEdge(1, 0, 0, 0, 255)
+  SetTextDropShadow()
+  SetTextOutline()
+  BeginTextCommandDisplayText("STRING")
+  AddTextComponentSubstringPlayerName(text)
+  EndTextCommandDisplayText(x - 0.1+w, y - 0.02+h)
 end
 
 Citizen.CreateThread( function()
@@ -82,6 +82,12 @@ Citizen.CreateThread( function()
 						radar.info2 = string.format("~y~Plate: ~w~%s  ~y~Model: ~w~%s  ~y~Speed: ~w~%s mph", bplate, bmodel, math.ceil(bvspeed))
 					
 					
+					end
+					if not IsEntityAVehicle(e) then
+					  radar.info = string.format("~y~Initializing ALPR...~w~321...~y~Loaded! ")
+					end
+					if not IsEntityAVehicle(j) then
+					  radar.info = string.format("~y~Initializing ALPR...~w~321...~y~Loaded! ")
 					end
 					
 			end
